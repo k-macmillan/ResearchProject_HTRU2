@@ -7,4 +7,5 @@ It includes 17,898 records with 1,639 real pulsar examples and 16,259 negative e
 There are eight continuous variables and a binary class variable.
 
 ## Goals
-Build TensorFlow from source # [checkbox:unchecked]
+[ ] Determine data set
+[ ] Build TensorFlow from source
