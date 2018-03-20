@@ -9,3 +9,9 @@ There are eight continuous variables and a binary class variable.
 ## Goals
 - [x] Determine data set
 - [ ] Build TensorFlow from source
+- [ ] Classify data set
+- [ ] Come up with alternative classification techniques
+- [ ] Write paper about methods tested
+
+## Paper
+The paper will be written to [NIPS standards](https://nips.cc/Conferences/2017/PaperInformation/StyleFiles), utilizing [nips_2017.sty](https://media.nips.cc/Conferences/NIPS2017/Styles/nips_2017.sty). 
