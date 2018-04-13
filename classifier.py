@@ -27,9 +27,11 @@ _CSV_COLUMN_NAMES = [
 
 _CSV_COLUMN_DEFAULTS = [[0.0], [0.0], [0.0], [0.0], [0.0], [0.0], [0.0], [0.0], [0]]
 
+_TEST_PERCENTAGE = 0.2
+
 _NUM_EXAMPLES = {
-    'train': int(17898*.8),
-    'test': int(17898*.2) + 1,
+    'train': int(17898*(1-_TEST_PERCENTAGE)),
+    'test': int(17898*_TEST_PERCENTAGE) + 1,
 }
 
 
@@ -53,9 +55,6 @@ def simple_model(in_tensor, num_inputs, num_classes, weights, biases):
 
 
 def main(argv):
-
-
-
     learning_rate = 0.001
     num_epochs = 100
     batch_size = 100  
@@ -63,8 +62,10 @@ def main(argv):
     num_hidden_2 = 10
 
 
-    (train_feature, train_label), (test_feature, test_label) = input_fn("HTRU_2.csv", _CSV_COLUMN_NAMES)
-    print("Data loaded!")
+    (train_feature, train_label), (test_feature, test_label) = input_fn(data_file="HTRU_2.csv", 
+                                                                        col_names=_CSV_COLUMN_NAMES, 
+                                                                        test_percentage=_TEST_PERCENTAGE,
+                                                                        label_name='class')    
     exit()
 
     X, Y = make_classification(n_samples=50000, n_features=10, n_informative=8, 
