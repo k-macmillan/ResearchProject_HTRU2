@@ -51,12 +51,12 @@ def model_Adagrad(features, labels, mode, params):
 
 
 def model_RMSProp(features, labels, mode, params):
-    """DNN with three hidden layers, and dropout of 0.1 probability."""
+    """DNN with X hidden layers, and dropout of 0.1 probability."""
     # Create three fully connected layers each layer having a dropout
     # probability of 0.1.
-    net = tf.feature_column.input_layer(features, params['feature_columns'])
+    net = tf.feature_column.input_layer(features, params['feature_columns'])    
     for units in params['hidden_units']:
-        net = tf.layers.dense(net, units=units, activation=tf.nn.selu)
+        net = tf.layers.dense(net, units=units, activation=tf.nn.crelu)
 
 
     # Compute logits (1 per class).

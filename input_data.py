@@ -29,7 +29,6 @@ def input_fn(data_file, col_names, header=None, test_percentage=0.2, label_name=
 
 
 
-
 # Thanks tensorflow website
 def train_input_fn(features, labels, batch_size):
     """An input function for training"""
@@ -37,7 +36,7 @@ def train_input_fn(features, labels, batch_size):
     dataset = tf.data.Dataset.from_tensor_slices((dict(features), labels))
 
     # Shuffle, repeat, and batch the examples.
-    dataset = dataset.shuffle(1000).repeat().batch(batch_size)
+    dataset = dataset.shuffle(14000).repeat().batch(batch_size)
 
     # Return the dataset.
     return dataset
