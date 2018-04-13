@@ -16,83 +16,57 @@ import numpy as np
 
 
 from input_data import input_fn
-
-# from official.utils.arg_parsers import parsers
-# from official.utils.logging import hooks_helper
-
-_CSV_COLUMN_NAMES = [
-    'mean_IP', 'std_IP', 'e_kurtosis_IP', 'skewness_IP', 'mean_DM',
-    'std_DM', 'e_kurtosis_DM', 'skewness_DM', 'class'
-]
-
-_CSV_COLUMN_DEFAULTS = [[0.0], [0.0], [0.0], [0.0], [0.0], [0.0], [0.0], [0.0], [0]]
-
-_TEST_PERCENTAGE = 0.2
-
-_NUM_EXAMPLES = {
-    'train': int(17898*(1-_TEST_PERCENTAGE)),
-    'test': int(17898*_TEST_PERCENTAGE) + 1,
-}
-
-
+_NUM_CLASSES = 2
 
 # https://github.com/soerendip/Tensorflow-binary-classification/blob/master/Tensorflow-binary-classification-model.ipynb
 def simple_model(in_tensor, num_inputs, num_classes, weights, biases):
-    learning_rate = 0.001
-    num_epochs = 100
-    batch_size = 100  
-    num_hidden_1 = 10
-    num_hidden_2 = 10
-
-
     layer_1 = tf.add(tf.matmul(in_tensor, weights['h1']), biases['b1'])
     layer_1 = tf.nn.relu(layer_1)
     layer_2 = tf.add(tf.matmul(layer_1, weights['h2']), biases['b2'])
     layer_2 = tf.nn.relu(layer_2)
+    layer_3 = tf.add(tf.matmul(layer_2, weights['h3']), biases['b3'])
+    layer_3 = tf.nn.relu(layer_3)
 
-    out_tensor = tf.matmul(layer_2, weights['out']) + biases['out']
+    out_tensor = tf.matmul(layer_3, weights['out']) + biases['out']
     return out_tensor
 
 
 def main(argv):
     learning_rate = 0.001
     num_epochs = 100
-    batch_size = 100  
-    num_hidden_1 = 10
-    num_hidden_2 = 10
+    batch_size = 100 
+    num_hidden_1 = 15
+    num_hidden_2 = 15
+    num_hidden_3 = 15
 
-
-    (train_feature, train_label), (test_feature, test_label) = input_fn(data_file="HTRU_2.csv", 
-                                                                        col_names=_CSV_COLUMN_NAMES, 
-                                                                        test_percentage=_TEST_PERCENTAGE,
-                                                                        label_name='class')    
-    exit()
-
-    X, Y = make_classification(n_samples=50000, n_features=10, n_informative=8, 
+    num_features = 10
+    X, Y = make_classification(n_samples=50000, n_features=num_features, n_informative=8, 
                            n_redundant=0, n_clusters_per_class=2)
     Y = np.array([Y, -(Y-1)]).T  # The model currently needs one column for each class
     X, X_test, Y, Y_test = train_test_split(X, Y)
 
-    num_inputs = 10
+    num_inputs = num_features
     num_classes = 2
     # dataset = input_fn("HTRU_2.csv", num_epochs, False, batch_size)
 
     ins = tf.placeholder("float", [None, num_inputs])
-    outs = tf.placeholder("float", [None, num_classes])
+    outs = tf.placeholder("float", [None, _NUM_CLASSES])
 
     weights = {
         'h1': tf.Variable(tf.random_normal([num_inputs, num_hidden_1])),
         'h2': tf.Variable(tf.random_normal([num_hidden_1, num_hidden_2])),
-        'out': tf.Variable(tf.random_normal([num_hidden_2, num_classes]))
+        'h3': tf.Variable(tf.random_normal([num_hidden_2, num_hidden_3])),
+        'out': tf.Variable(tf.random_normal([num_hidden_3, _NUM_CLASSES]))
     }
 
     biases = {
         'b1': tf.Variable(tf.random_normal([num_hidden_1])),
         'b2': tf.Variable(tf.random_normal([num_hidden_2])),
-        'out': tf.Variable(tf.random_normal([num_classes]))
+        'b3': tf.Variable(tf.random_normal([num_hidden_3])),
+        'out': tf.Variable(tf.random_normal([_NUM_CLASSES]))
     }
 
-    predictor = simple_model(ins, num_inputs, num_classes, weights, biases)
+    predictor = simple_model(ins, num_inputs, _NUM_CLASSES, weights, biases)
     cost_func = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=predictor, labels=outs))
     optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate).minimize(cost_func)
 
