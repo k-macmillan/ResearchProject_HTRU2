@@ -1,5 +1,6 @@
 import os.path
 import pandas as pd
+import tensorflow as tf
 from sklearn.model_selection import train_test_split
 
 def input_fn(data_file, col_names, header=None, test_percentage=0.2, label_name='class'):
@@ -19,9 +20,43 @@ def input_fn(data_file, col_names, header=None, test_percentage=0.2, label_name=
                            header=None)
     train, test = train_test_split(data, test_size=test_percentage)
     total = len(train) + len(test)
-    print(" with {} records.".format(total))
+    print(" with {} records.\n".format(total))
 
     train_features, train_label = train, train.pop(label_name)
     test_features, test_label = test, test.pop(label_name)
 
     return (train_features, train_label), (test_features, test_label)
+
+
+
+
+# Thanks tensorflow website
+def train_input_fn(features, labels, batch_size):
+    """An input function for training"""
+    # Convert the inputs to a Dataset.
+    dataset = tf.data.Dataset.from_tensor_slices((dict(features), labels))
+
+    # Shuffle, repeat, and batch the examples.
+    dataset = dataset.shuffle(1000).repeat().batch(batch_size)
+
+    # Return the dataset.
+    return dataset
+
+def eval_input_fn(features, labels, batch_size):
+    """An input function for evaluation or prediction"""
+    features=dict(features)
+    if labels is None:
+        # No labels, use only features.
+        inputs = features
+    else:
+        inputs = (features, labels)
+
+    # Convert the inputs to a Dataset.
+    dataset = tf.data.Dataset.from_tensor_slices(inputs)
+
+    # Batch the examples
+    assert batch_size is not None, "batch_size must not be None"
+    dataset = dataset.batch(batch_size)
+
+    # Return the dataset.
+    return dataset

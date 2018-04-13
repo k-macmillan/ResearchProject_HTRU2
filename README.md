@@ -9,7 +9,7 @@ There are eight continuous variables and a binary class variable.
 ## Goals
 - [x] Determine data set
 - [x] Build TensorFlow from source
-- [ ] Classify data set
+- [x] Classify data set
 - [ ] Come up with alternative classification techniques
 - [ ] Write paper about methods tested
 
