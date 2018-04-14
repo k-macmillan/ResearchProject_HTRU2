@@ -32,5 +32,5 @@ def run_network(csv, model, hidden_layers, batch_size, test_percent):
     # Evaluate the model.
     eval_result = classifier.evaluate(
         input_fn=lambda:eval_input_fn(test_x, test_y, batch_size))
-
-    print('\nTest set accuracy: {accuracy:0.3f}\n'.format(**eval_result))
+    
+    return eval_result
