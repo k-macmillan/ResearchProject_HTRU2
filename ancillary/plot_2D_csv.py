@@ -30,9 +30,9 @@ def run_conversion(i_file, o_file):
             Y.append(float(row[2]))
 
     plt.subplot(111, adjustable='box', aspect='auto')
-    plt.plot(X,Y, label='Loss/Advantage')
-    plt.xlabel('Step')
-    plt.ylabel('Advantage')
+    plt.plot(X,Y, label='Loss/Steps')
+    plt.xlabel('Steps')
+    plt.ylabel('Loss')
     plt.title(i_file[:-4] + ' over steps')
     plt.legend(loc=0) # 0: top right .... 4: bottom right
 
