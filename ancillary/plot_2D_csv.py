@@ -1,50 +1,21 @@
+# Assistance via:
 # https://pythonprogramming.net/loading-file-data-matplotlib-tutorial/
-
-# Base implementation, works
-# import matplotlib.pyplot as plt
-# import csv
-
-# fig = plt.figure()
-
-# X = []
-# Y = []
-
-# with open('HTRU_2_inverse.csv','r') as csvfile:
-#     plots = csv.reader(csvfile, delimiter=',')
-#     for row in plots:
-#         X.append(float(row[1]))
-#         Y.append(float(row[2]))
-
-# plt.plot(X,Y, label='Loaded from file!')
-# plt.xlabel('X')
-# plt.ylabel('Y')
-# plt.title('Interesting Graph\nCheck it out')
-# plt.legend()
-# plt.show()
-# fig.savefig('test_2D.svg')
-
 
 import matplotlib.pyplot as plt
 import csv
 import sys
 
-def main():
+def run_conversion(i_file, o_file):
     """This is intended to take CSV files with headers and turn them into SVG files. These 
-       files are intended to be from Tensorboard."""
+           files are intended to be from Tensorboard."""
 
-    if len(sys.argv) != 3:
-        print("Please specify input and output files as arguments: \"input.csv output\"")
-        exit()
-
-    i_file = sys.argv[1]
-    o_file = sys.argv[2]
-
-    if not sys.argv[1].endswith('.csv'):
+    # Handle extensions
+    if not i_file.endswith('.csv'):
         i_file = i_file + '.csv'
 
-    if not sys.argv[2].endswith('.svg'):
+    if not o_file.endswith('.svg'):
         o_file = o_file + '.svg'
-    
+        
     fig = plt.figure()
 
     X = []
@@ -59,14 +30,27 @@ def main():
             Y.append(float(row[2]))
 
     plt.subplot(111, adjustable='box', aspect='auto')
-    plt.plot(X,Y, label='Loss')
-    plt.xlabel('X')
-    plt.ylabel('Y')
+    plt.plot(X,Y, label='Loss/Advantage')
+    plt.xlabel('Step')
+    plt.ylabel('Advantage')
     plt.title(i_file[:-4] + ' over steps')
     plt.legend(loc=0) # 0: top right .... 4: bottom right
 
     plt.show()
     fig.savefig(o_file)
+
+
+def main():
+    if len(sys.argv) != 3:
+        print("Please specify input and output files as arguments: \"input.csv output\"")
+        exit()
+
+    i_file = sys.argv[1]
+    o_file = sys.argv[2]    
+
+
+    run_conversion(i_file,o_file)
+    
 
 if __name__ == '__main__':
     main()
