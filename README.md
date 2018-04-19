@@ -18,9 +18,11 @@ The paper will be written to [NIPS standards](https://nips.cc/Conferences/2017/P
 
 ## Results
 Accuracy of training data is over 97%.
-![Accuracy over training data](images/Accuracy_smoothed.png, "Training Accuracy")
+![Accuracy over training data](images/Accuracy_smoothed.png "Training accuracy, smoothed")
 
+
+![Accuracy over training data](images/Accuracy.svg "Training accuracy")
 
 
 Loss function approaches zero very quickly.
-![Loss while training data](images/Loss_smoothed.png, "Loss Progression")
+![Loss while training data](images/Loss_smoothed.png "Loss Progression")
