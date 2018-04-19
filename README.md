@@ -14,4 +14,9 @@ There are eight continuous variables and a binary class variable.
 - [ ] Write paper about methods tested
 
 ## Paper
-The paper will be written to [NIPS standards](https://nips.cc/Conferences/2017/PaperInformation/StyleFiles), utilizing [nips_2017.sty](https://media.nips.cc/Conferences/NIPS2017/Styles/nips_2017.sty). 
+The paper will be written to [NIPS standards](https://nips.cc/Conferences/2017/PaperInformation/StyleFiles), utilizing [nips_2017.sty](https://media.nips.cc/Conferences/NIPS2017/Styles/nips_2017.sty).
+
+## Results
+![Accuracy over training data](images/Accuracy_smoothed.png)
+
+![Loss while training data](images/Loss_smoothed.png)
