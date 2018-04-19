@@ -2,7 +2,7 @@ import tensorflow as tf
 from input_data import input_fn, train_input_fn, eval_input_fn
  
 
-def run_network(csv, model, hidden_layers, batch_size, test_percent):
+def run_network(csv, model, hidden_layers, batch_size, test_percent, run):
     # Read in a CSV object
     (train_x, train_y), (test_x, test_y) = input_fn(data_file=csv.name,
                                                     col_names=csv.col_names,
@@ -15,6 +15,7 @@ def run_network(csv, model, hidden_layers, batch_size, test_percent):
         my_feature_columns.append(tf.feature_column.numeric_column(key=key))
     classifier = tf.estimator.Estimator(
         model_fn=model,
+        model_dir="model_" + str(run),
         params={
             'feature_columns': my_feature_columns,
             'hidden_units': hidden_layers,
@@ -23,8 +24,8 @@ def run_network(csv, model, hidden_layers, batch_size, test_percent):
         })
 
     # Train the Model.
-    with tf.device('/device:GPU:0'):
-    # with tf.device('/cpu:0'):
+    # with tf.device('/device:GPU:0'):
+    with tf.device('/cpu:0'):
         classifier.train(
             input_fn=lambda:train_input_fn(train_x, train_y, batch_size),
             steps=csv.num_examples['train'])

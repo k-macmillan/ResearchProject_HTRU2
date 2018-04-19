@@ -6,9 +6,7 @@ import tensorflow as tf
 
 
 def model_Adagrad(features, labels, mode, params):
-    """DNN with three hidden layers, and dropout of 0.1 probability."""
-    # Create three fully connected layers each layer having a dropout
-    # probability of 0.1.
+    """DNN with params['hidden_units'] hidden layers."""
     net = tf.feature_column.input_layer(features, params['feature_columns'])
     for units in params['hidden_units']:
         net = tf.layers.dense(net, units=units, activation=tf.nn.selu)
@@ -51,15 +49,13 @@ def model_Adagrad(features, labels, mode, params):
 
 
 def model_RMSProp(features, labels, mode, params):
-    """DNN with X hidden layers, and dropout of 0.1 probability."""
-    # Create three fully connected layers each layer having a dropout
-    # probability of 0.1.
+    """DNN with params['hidden_units'] hidden layers."""
     net = tf.feature_column.input_layer(features, params['feature_columns'])    
     for units in params['hidden_units']:
-        net = tf.layers.dense(net, units=units, activation=tf.nn.crelu)
+        net = tf.layers.dense(net, units=units, activation=tf.nn.selu)
 
 
-    # Compute logits (1 per class).
+    # Compute 1 logit per class
     logits = tf.layers.dense(net, params['n_classes'], activation=None)
 
     # Compute predictions.
@@ -80,11 +76,13 @@ def model_RMSProp(features, labels, mode, params):
                                    predictions=predicted_classes,
                                    name='acc_op')
     metrics = {'accuracy': accuracy}
+    # Add accuracy to Tensorboard
     tf.summary.scalar('accuracy', accuracy[1])
 
     if mode == tf.estimator.ModeKeys.EVAL:
-        return tf.estimator.EstimatorSpec(
-            mode, loss=loss, eval_metric_ops=metrics)
+        return tf.estimator.EstimatorSpec(mode, 
+                                          loss=loss, 
+                                          eval_metric_ops=metrics)
 
     # Create training op.
     assert mode == tf.estimator.ModeKeys.TRAIN
