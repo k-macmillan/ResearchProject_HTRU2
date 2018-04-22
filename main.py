@@ -12,7 +12,7 @@ from network import run_network
 
 _TEST_PERCENTAGE = 0.2
 _TRAIN = int(17898*(1-_TEST_PERCENTAGE))
-_BATCH_SIZE = max(int(_TRAIN*.01), 1)
+_BATCH_SIZE = max(int(_TRAIN*.1), 1)
 _MODEL = model_RMSProp
 
 # Create a CSV object
@@ -44,8 +44,8 @@ def main(argv):
         print("Run: ", run)
         total_acc += run_network(csv, _MODEL, _HIDDEN_LAYERS, _BATCH_SIZE, _TEST_PERCENTAGE, run)['accuracy']
 
-
-    print("Accuracy = ", total_acc / runs)
+    csv.accuracy = total_acc / runs
+    print("Accuracy = ", csv.accuracy)
 
 if __name__ == '__main__':
     tf.logging.set_verbosity(tf.logging.INFO)

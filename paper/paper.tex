@@ -24,93 +24,89 @@
 \usepackage{amsfonts}       % blackboard math symbols
 \usepackage{nicefrac}       % compact symbols for 1/2, etc.
 \usepackage{microtype}      % microtypography
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage{algorithmic}
 
-\title{Formatting instructions for NIPS 2017}
-
-% The \author macro works with any number of authors. There are two
-% commands used to separate the names and addresses of multiple
-% authors: \And and \AND.
-%
-% Using \And between authors leaves it to LaTeX to determine where to
-% break the lines. Using \AND forces a line break at that point. So,
-% if LaTeX puts 3 of 4 authors names on the first line, and the last
-% on the second line, try using \AND instead of \And before the third
-% author name.
+\title{Pulsar Classification using Deep Neural Networks}
 
 \author{
-  Kyle W.~MacMillan\thanks{Use footnote for providing further
-    information about author (webpage, alternative
-    address)---\emph{not} for acknowledging funding agencies.} \\
+  Kyle W.~MacMillan
   Department of Computer Science\\
-  Cranberry-Lemon University\\
-  Pittsburgh, PA 15213 \\
-  \texttt{hippo@cs.cranberry-lemon.edu} \\
-  %% examples of more authors
-  %% \And
-  %% Coauthor \\
-  %% Affiliation \\
-  %% Address \\
-  %% \texttt{email} \\
-  %% \AND
-  %% Coauthor \\
-  %% Affiliation \\
-  %% Address \\
-  %% \texttt{email} \\
-  %% \And
-  %% Coauthor \\
-  %% Affiliation \\
-  %% Address \\
-  %% \texttt{email} \\
-  %% \And
-  %% Coauthor \\
-  %% Affiliation \\
-  %% Address \\
-  %% \texttt{email} \\
+  South Dakota School of Mines and Technology\\
+  Rapid City, SD 57701 \\
+  \texttt{kyle.macmillan@mines.sdsmt.edu} \\
 }
 
 \begin{document}
-% \nipsfinalcopy is no longer used
 
 \maketitle
 
 \begin{abstract}
-  The abstract paragraph should be indented \nicefrac{1}{2}~inch
-  (3~picas) on both the left- and right-hand margins. Use 10~point
-  type, with a vertical spacing (leading) of 11~points.  The word
-  \textbf{Abstract} must be centered, bold, and in point size 12. Two
-  line spaces precede the abstract. The abstract must be limited to
-  one paragraph.
+  Pulsars are rapidly rotating, highly magnetized, neutron stars and white 
+  dwarfs that emit focused electromagnetic radiation in a beam. The beam is 
+  only visible to us when it is directly facing Earth and is the reason for 
+  their pulsed nature. This paper approaches classification of pulsars and 
+  non-pulsars with the intent of learning more about TensorFlow. The 
+  classification method used is Deep Neural Networks and an acceptable level of 
+  accuracy was obtained.
 \end{abstract}
 
-\section{Submission of papers to NIPS 2017}
+\section{Introduction}
+  We were tasked with picking a dataset and training a deep learning network. 
+  First thing to do was to pick a dataset. Being an open-ended assignment there 
+  was uncertainty as to what particular dataset to explore. Initial looks 
+  involved different image classification datasets such as CIFAR-10, 
+  Caltech 101, and NORB. Down the road there is no desire to work with image 
+  data classification, work with files and datasets of continuous and 
+  discrete data are preferred. After thorough search of the available datasets 
+  it was decided pulsar classification best suited this paper. 
 
-NIPS requires electronic submissions.  The electronic submission site
-is
-\begin{center}
-  \url{https://cmt.research.microsoft.com/NIPS2017/}
-\end{center}
+  The last decision before pressing on to data format was to pick the correct 
+  deep learning framework for the job. There were several options but TensorFlow 
+  seemed like a good choice. Keras and PyTorch are other tools that utilize 
+  TensorFlow but were not used because those are often considered a "front end" 
+  for TensorFlow, which was not part of the goals of the assignment.
 
-Please read carefully the instructions below and follow them
-faithfully.
+\section{Method}
 
-\subsection{Style}
+\subsection{Data Format}
+  After determining the dataset and the framework to be utilized it is 
+  necessary to figure out how to read data from the dataset. A modular approach 
+  was taken with this project. Users will be able to select a comma-separated 
+  values (CSV) file to load in. By specifying a class to contain the CSV data it 
+  is possible to run multiple datasets while making only minor modifications to 
+  the code. The format is also much easier to read as a result of the class 
+  format.
 
-Papers to be submitted to NIPS 2017 must be prepared according to the
-instructions presented here. Papers may only be up to eight pages
-long, including figures. This does not include acknowledgments and 
-cited references which are allowed on subsequent pages.
-Papers that exceed these limits will not be reviewed, or in any
-other way considered for presentation at the conference.
+  Rather than code up a custom method of moving CSV data into a format usable by 
+  the deep learning framework it was determined to "stand on the shoulders of 
+  giants". Pandas was used to bring CSV data into usable form. After pulling the 
+  data into a single structure it was necessary to split the data into training 
+  and testing data. Again, rather than code that from scratch it was determined 
+  best practice to utilize existing tools. 
 
-The margins in 2017 are the same as since 2007, which allow for
-$\sim$$15\%$ more words in the paper compared to earlier years.
+  For that endevour scikit-learn was used, specifically the 
+  $train\_test\_split()$ method. As is standard for classification problems the 
+  data was segmented into 80\% training and 20\% testing data. It was then 
+  necessary to place the $class$ label into a data structure for later. For both 
+  the train and test data, associated labels are passed, along with the data, 
+  as tuples. The psuedocode for this section can be found under Algorithm 
+  \ref{alg:input_fn}.
 
-Authors are required to use the NIPS \LaTeX{} style files obtainable
-at the NIPS website as indicated below. Please make sure you use the
-current files and not previous versions. Tweaking the style files may
-be grounds for rejection.
+  \begin{algorithm}
+    \caption{$input\_fn()$}
+    \label{alg:input_fn}
+    \begin{algorithmic}
+      \STATE $data \gets CSV$\\
+      \STATE $test, train \gets train\_test\_split(data)$
+      \STATE $test\_label \gets test.pop(class)$
+      \STATE $train\_label \gets train.pop(class)$
+      \RETURN $(train, train\_label), (test,test\_label)$
+    \end{algorithmic}
+  \end{algorithm}
 
-\subsection{Retrieval of style files}
+\section{Retrieval of style files}
 
 The style files for NIPS and other conference information are
 available on the World Wide Web at
