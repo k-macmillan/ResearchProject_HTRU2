@@ -15,7 +15,7 @@ from network import run_network
 _NUM_ELEMENTS = 17898
 _TEST_PERCENTAGE = 0.2
 _TRAIN = int(_NUM_ELEMENTS*(1-_TEST_PERCENTAGE))
-_BATCH_SIZE = max(int(_TRAIN*.001), 1)
+_BATCH_SIZE = max(int(_TRAIN*.1), 1)
 _MODEL = model_RMSProp
 
 # Create a CSV object
