@@ -20,17 +20,17 @@ The paper will be written to [NIPS standards](https://nips.cc/Conferences/2017/P
 
 
 ## Results
-Final accuracy: 97.8687
+Final accuracy: 97.8687.  
 ![Accuracy averaged over 20 runs](paper/images/accuracy_percent_small.png "Average accuracy")
 
-Accuracy of training data is over 97%.
+Accuracy of training data is over 97%.  
 ![Accuracy over training data](paper/images/Accuracy_smoothed.png "Training accuracy, smoothed")
 
 
 ![Accuracy over training data](paper/images/Accuracy.svg "Training accuracy")
 
 
-Loss function approaches zero very quickly.
+Loss function approaches zero very quickly.  
 ![Loss while training data](paper/images/Loss_smoothed.png "Loss Progression")
 
 ## Build
