@@ -32,6 +32,7 @@ To utilize this repository you will need the following:
 - [TensorFlow](https://www.tensorflow.org/)
 - [Pandas](http://pandas.pydata.org/)
 - [scikit-learn](http://scikit-learn.org/stable/)
+
 After installing those you will be able to run `main.py`. If you wish to see my 
 results you can run `tensorboard --logdir model` from the main directory which 
 will allow you to see all of the visualizations associated with this repository.
