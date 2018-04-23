@@ -29,6 +29,7 @@ Loss function approaches zero very quickly.
 
 ## Build
 To utilize this repository you will need the following:
+- [Python3](https://www.python.org/download/releases/3.0/)
 - [TensorFlow](https://www.tensorflow.org/)
 - [Pandas](http://pandas.pydata.org/)
 - [scikit-learn](http://scikit-learn.org/stable/)
