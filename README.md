@@ -11,7 +11,7 @@ There are eight continuous variables and a binary class variable.
 - [x] Build TensorFlow from source
 - [x] Classify data set
 - [x] Explore alternative classification techniques
-- [ ] Write paper about methods tested
+- [x] Write paper about methods tested
 
 ## Paper
 The paper will be written to [NIPS standards](https://nips.cc/Conferences/2017/PaperInformation/StyleFiles), utilizing [nips_2017.sty](https://media.nips.cc/Conferences/NIPS2017/Styles/nips_2017.sty).
@@ -26,3 +26,12 @@ Accuracy of training data is over 97%.
 
 Loss function approaches zero very quickly.
 ![Loss while training data](images/Loss_smoothed.png "Loss Progression")
+
+## Build
+To utilize this repository you will need the following:
+- [TensorFlow](https://www.tensorflow.org/)
+- [Pandas](http://pandas.pydata.org/)
+- [scikit-learn](http://scikit-learn.org/stable/)
+After installing those you will be able to run `main.py`. If you wish to see my 
+results you can run `tensorboard --logdir model` from the main directory which 
+will allow you to see all of the visualizations associated with this repository.
