@@ -13,3 +13,5 @@ __pycache__/
 *.out
 *.gz
 *.sty
+*.bbl
+*.blg
