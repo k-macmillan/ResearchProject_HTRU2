@@ -39,12 +39,12 @@ To utilize this repository you will need the following:
 
 After installing those you will need to download the [dataset](https://archive.ics.uci.edu/ml/machine-learning-databases/00372/HTRU2.zip) and place `HTRU_2.csv` in the same folder 
 as `main.py`. You will then be able to run `main.py`. If you wish to see **my** results 
-you can run: 
+you can run the following from the main directory: 
 
 `tensorboard --logdir model` 
 
-from the main directory which will allow you to see all of the visualizations associated 
-with this repository. Otherwise, if you wish to see how your model ran it should have saved
-under "model_X", where "X" is the run you wish to view. Command: 
+This will will allow you to see all of the visualizations associated with this repository. 
+Otherwise, if you wish to see how your model ran it should have saved under "model_X", 
+where "X" is the run you wish to view. Command: 
 
 `tensorboard --logdir model_X`.
