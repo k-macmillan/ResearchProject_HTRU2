@@ -14,12 +14,15 @@ There are eight continuous variables and a binary class variable.
 - [x] Write paper about methods tested
 
 ## Paper
-The paper will be written to [NIPS standards](https://nips.cc/Conferences/2017/PaperInformation/StyleFiles), utilizing [nips_2017.sty](https://media.nips.cc/Conferences/NIPS2017/Styles/nips_2017.sty). The paper is located at:
+The paper will be written to [NIPS standards](https://nips.cc/Conferences/2017/PaperInformation/StyleFiles), utilizing [nips_2017.sty](https://media.nips.cc/Conferences/NIPS2017/Styles/nips_2017.sty). The paper is located [here](https://github.com/macattackftw/ResearchProject_HTRU2/blob/master/paper/paper.pdf) at:
 
 `https://github.com/macattackftw/ResearchProject_HTRU2/blob/master/paper/paper.pdf`
 
 
 ## Results
+Final accuracy: 97.8687
+![Accuracy averaged over 20 runs](paper/images/accuracy_percent_small.png "Average accuracy")
+
 Accuracy of training data is over 97%.
 ![Accuracy over training data](paper/images/Accuracy_smoothed.png "Training accuracy, smoothed")
 
