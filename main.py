@@ -35,7 +35,7 @@ _HIDDEN_LAYERS = [_NODES_PER_LAYER]*_LAYERS
 def main(argv):
     # Clears all previous models
     for name in glob.glob('model_*'):
-      shutil.rmtree(name)
+        shutil.rmtree(name)
     
     runs = 1
     try:

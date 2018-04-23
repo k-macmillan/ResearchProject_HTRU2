@@ -14,7 +14,10 @@ There are eight continuous variables and a binary class variable.
 - [x] Write paper about methods tested
 
 ## Paper
-The paper will be written to [NIPS standards](https://nips.cc/Conferences/2017/PaperInformation/StyleFiles), utilizing [nips_2017.sty](https://media.nips.cc/Conferences/NIPS2017/Styles/nips_2017.sty).
+The paper will be written to [NIPS standards](https://nips.cc/Conferences/2017/PaperInformation/StyleFiles), utilizing [nips_2017.sty](https://media.nips.cc/Conferences/NIPS2017/Styles/nips_2017.sty). The paper is located at:
+
+`https://github.com/macattackftw/ResearchProject_HTRU2/blob/master/paper/paper.pdf`
+
 
 ## Results
 Accuracy of training data is over 97%.
@@ -34,12 +37,14 @@ To utilize this repository you will need the following:
 - [Pandas](http://pandas.pydata.org/)
 - [scikit-learn](http://scikit-learn.org/stable/)
 
-After installing those you will be able to run `main.py`. If you wish to see 
-**my** results you can run: 
+After installing those you will need to download the [dataset](https://archive.ics.uci.edu/ml/machine-learning-databases/00372/HTRU2.zip) and place `HTRU_2.csv` in the same folder 
+as `main.py`. You will then be able to run `main.py`. If you wish to see **my** results 
+you can run: 
 
 `tensorboard --logdir model` 
 
-from the main directory which will allow you to see all of the visualizations associated with this repository. Otherwise, if you wish to see how your model ran it should have saved
+from the main directory which will allow you to see all of the visualizations associated 
+with this repository. Otherwise, if you wish to see how your model ran it should have saved
 under "model_X", where "X" is the run you wish to view. Command: 
 
 `tensorboard --logdir model_X`.
